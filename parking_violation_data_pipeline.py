@@ -14,8 +14,12 @@ def run_parking_violations_data_pipeline(
     """Run parking violations data pipeline."""
 
     df = pd.read_csv(input_file)
+
     # Your transformations
-    df.to_parquet(
+    states_to_remove = ["99"]
+    df_fin = df[~df["Registration State"].isin(states_to_remove)]
+
+    df_fin.to_parquet(
         os.path.join(output_loc, run_id),
         partition_cols=["Registration State"],
     )
