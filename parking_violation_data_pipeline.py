@@ -17,7 +17,7 @@ def run_parking_violations_data_pipeline(
     # Your transformations
     df.to_parquet(
         os.path.join(output_loc, run_id),
-        partition_cols=["Registration on State"],
+        partition_cols=["Registration State"],
     )
 
 
