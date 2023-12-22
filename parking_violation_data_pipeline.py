@@ -3,6 +3,7 @@
 
 import argparse
 import os
+import shutil
 import pandas as pd
 
 
@@ -12,6 +13,10 @@ def run_parking_violations_data_pipeline(
     run_id: str,
 ):
     """Run parking violations data pipeline."""
+
+    output_path = os.path.join(output_loc, run_id)
+    if os.path.exists(output_path):
+        shutil.rmtree(output_path)  # Removes entire folder
 
     df = pd.read_csv(input_file)
 
